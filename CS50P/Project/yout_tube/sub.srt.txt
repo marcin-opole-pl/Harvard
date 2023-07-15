@@ -1,0 +1,15 @@
+1
+00:00:00,050 --> 00:00:02,000
+CS50’s Introduction to Programming with Python
+
+2
+00:00:02,050 --> 00:00:06,000
+My project name is Analog Clock Master
+
+3
+00:00:06,050 --> 00:00:10,000
+The purpose of the project is to help reading analog clock
+
+4
+00:00:10,050 --> 00:00:14,000
+My name is Marcin. I'm from Opole in Poland.

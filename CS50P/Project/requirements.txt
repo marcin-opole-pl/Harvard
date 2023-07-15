@@ -1,0 +1,7 @@
+tkinter
+time
+math
+numpy
+random
+re
+customtkinter
