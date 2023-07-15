@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Right answer
+                let right = document.querySelector('.right');
+                right.addEventListener('click', function() {
+                    right.style.backgroundColor = 'green';
+                    document.querySelector('#response1').innerHTML = 'Right answer';
+                });
+                // Wrong aswers
+                let x = document.querySelectorAll('.wrong');
+                for(let i = 0; i < x.length; i++)
+                {
+                    x[i].addEventListener('click', function(event) {
+                    x[i].style.backgroundColor = 'red';
+                    document.querySelector('#response1').innerHTML = 'Wrong answer';
+                    });
+                }
+                // Free response question
+                document.querySelector('#check').addEventListener('click', function() {
+                    let input = document.querySelector('input');
+                    if (input.value == 'Romania') {
+                        input.style.backgroundColor = 'green';
+                        document.querySelector('#response2').innerHTML = 'Right answer';
+                    } else {
+                        input.style.backgroundColor = 'red';
+                        document.querySelector('#response2').innerHTML = 'Wrong answer';
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+
+                <h3>Which country has all its neighbours changed in last 25 years?</h3>
+                <button class="wrong">Germany</button>
+                <button class="right">Poland</button>
+                <button class="wrong">USA</button>
+                <button class="wrong">India</button>
+
+                <p id="response1"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+
+                <h3>Which country has almost the some flag as Chad?</h3>
+                <input type="text"></input>
+                <button id="check">Check answer</button>
+
+                <p id="response2"></p>
+
+            </div>
+        </div>
+    </body>
+</html>
