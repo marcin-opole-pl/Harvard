@@ -1,0 +1,49 @@
+header {
+    background-color: #E2C8B6;
+    color: #212529;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+}
+body {
+    background-color: #E2DEB6;
+}
+.small_italic {
+    background-color: #E2C8B6;
+    color: #212529;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+}
+.nav-link {
+    padding-inline: 200px;
+}
+.navbar {
+    margin: auto;
+    padding-inline: 200px;
+    background-color: #D0E2B6;
+    font-size: 2rem;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.right {
+    display: block;
+    margin-left: auto;
+    width: 50%;
+}    margin-right: auto;
+.left {
+    display: block;
+    margin-right: auto;
+    width: 50%;
+}
+img {
+    float: right;
+}
