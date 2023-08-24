@@ -114,6 +114,11 @@ function love.load()
     -- 3. 'play' (the ball is in play, bouncing between paddles)
     -- 4. 'done' (the game is over, with a victor, ready for restart)
     gameState = 'start'
+
+    -- game mode:
+    -- 1. 'human' (the player 1 is human)
+    -- 2. 'AI' (the player 1 is computer)
+    gameMode = 'human'
 end
 
 --[[
@@ -233,12 +238,18 @@ function love.update(dt)
     -- paddles can move no matter what state we're in
     --
     -- player 1
-    if love.keyboard.isDown('w') then
-        player1.dy = -PADDLE_SPEED
-    elseif love.keyboard.isDown('s') then
-        player1.dy = PADDLE_SPEED
+    -- human mode
+    if gameMode == 'human' then
+        if love.keyboard.isDown('w') then
+            player1.dy = -PADDLE_SPEED
+        elseif love.keyboard.isDown('s') then
+            player1.dy = PADDLE_SPEED
+        else
+            player1.dy = 0
+        end
     else
-        player1.dy = 0
+        -- computer mode
+        player1.y = ball.y
     end
 
     -- player 2
@@ -273,7 +284,33 @@ function love.keypressed(key)
         love.event.quit()
     -- if we press enter during either the start or serve phase, it should
     -- transition to the next appropriate state
+    -- gameplay for player 1 = human
     elseif key == 'enter' or key == 'return' then
+        if gameState == 'start' then
+            gameState = 'serve'
+        elseif gameState == 'serve' then
+            gameState = 'play'
+        elseif gameState == 'done' then
+            -- game is simply in a restart phase here, but will set the serving
+            -- player to the opponent of whomever won for fairness!
+            gameState = 'serve'
+
+            ball:reset()
+
+            -- reset scores to 0
+            player1Score = 0
+            player2Score = 0
+
+            -- decide serving player as the opposite of who won
+            if winningPlayer == 1 then
+                servingPlayer = 2
+            else
+                servingPlayer = 1
+            end
+        end
+    -- gameplay for player 1 = computer
+    elseif key == 'c' then
+        gameMode = 'AI'
         if gameState == 'start' then
             gameState = 'serve'
         elseif gameState == 'serve' then
@@ -314,20 +351,41 @@ function love.draw()
         -- UI messages
         love.graphics.setFont(smallFont)
         love.graphics.printf('Welcome to Pong!', 0, 10, VIRTUAL_WIDTH, 'center')
-        love.graphics.printf('Press Enter to begin!', 0, 20, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf('Press Enter to play with human!', 0, 20, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf('Press "c" to play with computer!', 0, 30, VIRTUAL_WIDTH, 'center')
     elseif gameState == 'serve' then
         -- UI messages
         love.graphics.setFont(smallFont)
-        love.graphics.printf('Player ' .. tostring(servingPlayer) .. "'s serve!", 
-            0, 10, VIRTUAL_WIDTH, 'center')
+        if gameMode == 'human' then
+            love.graphics.printf('Player ' .. tostring(servingPlayer) .. "'s serve!", 
+                0, 10, VIRTUAL_WIDTH, 'center')
+        else
+            if servingPlayer == 1 then
+                love.graphics.printf("Computer's serve!", 
+                    0, 10, VIRTUAL_WIDTH, 'center')
+            else
+                love.graphics.printf("Player 2's serve!", 
+                    0, 10, VIRTUAL_WIDTH, 'center')
+            end
+        end
         love.graphics.printf('Press Enter to serve!', 0, 20, VIRTUAL_WIDTH, 'center')
     elseif gameState == 'play' then
         -- no UI messages to display in play
     elseif gameState == 'done' then
         -- UI messages
         love.graphics.setFont(largeFont)
-        love.graphics.printf('Player ' .. tostring(winningPlayer) .. ' wins!',
-            0, 10, VIRTUAL_WIDTH, 'center')
+        if gameMode == 'human'then
+            love.graphics.printf('Player ' .. tostring(winningPlayer) .. ' wins!',
+                0, 10, VIRTUAL_WIDTH, 'center')
+        else
+            if winningPlayer == 1 then
+                love.graphics.printf('Computer wins!',
+                    0, 10, VIRTUAL_WIDTH, 'center')
+            else
+                love.graphics.printf('Player2 wins!',
+                    0, 10, VIRTUAL_WIDTH, 'center')
+                end
+            end
         love.graphics.setFont(smallFont)
         love.graphics.printf('Press Enter to restart!', 0, 30, VIRTUAL_WIDTH, 'center')
     end
@@ -341,6 +399,9 @@ function love.draw()
 
     -- display FPS for debugging; simply comment out to remove
     displayFPS()
+
+    -- display gameState
+    displayState()
 
     -- end our drawing to push
     push:apply('end')
@@ -366,4 +427,13 @@ function displayFPS()
     love.graphics.setFont(smallFont)
     love.graphics.setColor(0, 1, 0, 1)
     love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()), 10, 10)
+end
+
+--[[ 
+    Function to display game state
+]]
+function displayState()
+    love.graphics.setFont(smallFont)
+    love.graphics.setColor(1,0,0,1)
+    love.graphics.print('Game state: '..gameState..' Mode: '..gameMode, 10, 20)
 end
