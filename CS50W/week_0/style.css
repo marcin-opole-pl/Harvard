@@ -1,0 +1,107 @@
+/*main input field*/
+.field {
+    border-radius: 25px;
+    height: 45px;
+    width: 28%;
+    padding: 5px;
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+.field:hover {
+    background-color: lightgray;
+}
+
+/*input button*/
+.button {
+    border-radius: 10px;
+    font: 1em sans-serif;
+    padding: 5px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.button:hover {
+    border-style: solid;
+    border-color: darkgray;
+}
+
+/* container justified to the center*/
+.container_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* container justified to the right*/
+.container_right {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/*link*/
+.link {
+    color: <system-color>;
+    font: 1em sans-serif;
+    margin-right: 10px;
+    text-decoration: solid;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/*main logo*/
+#logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 250px;
+    font: bold 4em sans-serif;
+}
+
+/*advanced search logo*/
+#adv_search {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: 30px;
+    font: 1.5em sans-serif;
+    color: orangered;
+}
+
+/*advanced search field name*/
+.td_name {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-right: 40px;
+    margin-bottom: 20px;
+}
+
+/*advanced search input field*/
+.td_input {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 500px;
+    height: 25px;
+}
+
+/*advanced search submit button*/
+#adv_button {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    background-color: cornflowerblue;
+    border-style: none;
+    padding: 10px;
+    color: azure;
+}
